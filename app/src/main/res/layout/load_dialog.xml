@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:background="#fff"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/img_dia"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:src="@drawable/loading"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:layout_marginLeft="8dp"
+        android:layout_gravity="center"
+        android:text="@string/loading"/>
+</LinearLayout>
