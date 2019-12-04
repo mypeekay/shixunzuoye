@@ -83,6 +83,13 @@ public class BookkeepActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        load();
+        bookKeepLVAdapter.notifyDataSetChanged();
+    }
+
     public void load() {
         bookKeepBeans.clear();
         shouru = 0;
