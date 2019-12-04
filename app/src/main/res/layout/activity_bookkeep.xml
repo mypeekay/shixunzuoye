@@ -20,11 +20,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="总结余"
+            android:text="@string/all_money"
             android:textColor="#fff"
             android:textSize="16dp" />
 
         <TextView
+            android:id="@+id/tv_bk_jieyu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -34,19 +35,19 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv_shouru"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="总收入￥0"
             android:textColor="#fff"
             android:textSize="16dp" />
 
         <TextView
+            android:id="@+id/tv_zhichu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="总支出￥0"
             android:textColor="#fff"
             android:textSize="16dp" />
     </LinearLayout>

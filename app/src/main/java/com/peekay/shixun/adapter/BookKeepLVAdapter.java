@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.peekay.shixun.R;
 import com.peekay.shixun.bean.BookKeepBean;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class BookKeepLVAdapter extends BaseAdapter {
@@ -63,14 +64,14 @@ public class BookKeepLVAdapter extends BaseAdapter {
         } else {
             viewHolder.textView_remark.setVisibility(View.GONE);
         }
-
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
         if (bookKeepBeans.get(position).getType() == 0) {
             viewHolder.imageView_type.setImageResource(R.drawable.bookkeep_red);//支出
-            viewHolder.textView_money.setText("￥-" + bookKeepBeans.get(position).getMoney());
+            viewHolder.textView_money.setText("￥-" + decimalFormat.format(bookKeepBeans.get(position).getMoney()));
             viewHolder.textView_money.setTextColor(Color.parseColor("#F44336"));
         } else {
             viewHolder.imageView_type.setImageResource(R.drawable.bookkeep_green);//收入
-            viewHolder.textView_money.setText("￥" + bookKeepBeans.get(position).getMoney());
+            viewHolder.textView_money.setText("￥" + decimalFormat.format(bookKeepBeans.get(position).getMoney()));
             viewHolder.textView_money.setTextColor(Color.parseColor("#4CAF50"));
         }
         return view;
