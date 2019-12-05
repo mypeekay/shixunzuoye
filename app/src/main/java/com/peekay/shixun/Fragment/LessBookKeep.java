@@ -1,11 +1,14 @@
 package com.peekay.shixun.Fragment;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,9 +24,10 @@ import java.util.List;
 public class LessBookKeep extends Fragment {
     View view;
     String item = "三餐";
-    ListView listView;
+    GridView gridView;
     List<ADDBK> addbks = new ArrayList<>();
     ADDBKAdapter addbkAdapter;
+    int index = -1;
 
     public String getItem() {
         return item;
@@ -40,7 +44,7 @@ public class LessBookKeep extends Fragment {
     }
 
     private void initView() {
-        listView = view.findViewById(R.id.lv_lesskp);
+        gridView = view.findViewById(R.id.gd_lesskp);
         addbks.add(new ADDBK(R.drawable.food, "三餐"));
         addbks.add(new ADDBK(R.drawable.snak, "零食"));
         addbks.add(new ADDBK(R.drawable.cloth, "衣服"));
@@ -63,11 +67,25 @@ public class LessBookKeep extends Fragment {
         addbks.add(new ADDBK(R.drawable.sport, "运动"));
         addbks.add(new ADDBK(R.drawable.other, "其他"));
         addbkAdapter = new ADDBKAdapter(getContext(), R.layout.addbk_item, addbks);
-        listView.setAdapter(addbkAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setAdapter(addbkAdapter);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = addbks.get(i).getItem();
+                if (index == -1) {
+                    View view1 = adapterView.getChildAt(i);
+                    TextView textView = view1.findViewById(R.id.tv_addbk);
+                    textView.setTextColor(Color.rgb(219, 68, 55));
+                    index = i;
+                } else {
+                    View view1 = adapterView.getChildAt(index);
+                    TextView textView = view1.findViewById(R.id.tv_addbk);
+                    textView.setTextColor(Color.rgb(0, 0, 0));
+                    view1 = adapterView.getChildAt(i);
+                    textView = view1.findViewById(R.id.tv_addbk);
+                    textView.setTextColor(Color.rgb(219, 68, 55));
+                    index = i;
+                }
             }
         });
     }

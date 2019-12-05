@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.peekay.shixun.BookkeepActivity;
+import com.peekay.shixun.PersonalInfoActivity;
 import com.peekay.shixun.R;
 import com.peekay.shixun.SettingActivity;
 import com.peekay.shixun.adapter.LvInfoAdapter;
@@ -59,7 +60,7 @@ public class InfoFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        Toast.makeText(getContext(), "null", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(), PersonalInfoActivity.class));
                         break;
                     case 1:
                         startActivity(new Intent(getContext(), BookkeepActivity.class));

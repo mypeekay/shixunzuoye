@@ -49,4 +49,9 @@
     <string name="pic_info">图片详情</string>
     <string name="null_pic">当前暂无图片</string>
     <string name="all_money">总结余</string>
+    <string name="per_info">个人信息</string>
+    <string name="name">姓名</string>
+    <string name="touxiang">头像</string>
+    <string name="sex">性别</string>
+    <string name="birthday">生日</string>
 </resources>

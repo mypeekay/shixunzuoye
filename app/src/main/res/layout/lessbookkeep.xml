@@ -5,11 +5,12 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv_lesskp"
+    <GridView
+        android:id="@+id/gd_lesskp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:divider="@null"
-        android:scrollbars="none"></ListView>
+        android:numColumns="5"
+        android:scrollbars="none"></GridView>
 
 </LinearLayout>
