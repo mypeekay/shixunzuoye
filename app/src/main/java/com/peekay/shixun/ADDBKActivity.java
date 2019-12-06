@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -290,6 +291,8 @@ public class ADDBKActivity extends AppCompatActivity implements View.OnClickList
 
     //保存方法
     private Boolean saveBK(String s) {
+        DatePicker datePicker = new DatePicker(this);
+        String time = datePicker.getYear() + "-" + (datePicker.getMonth() + 1) + "-" + datePicker.getDayOfMonth();
         switch (textView_title.getText().toString()) {
             case "支出":
                 item = lessBookKeep.getItem();
@@ -301,7 +304,7 @@ public class ADDBKActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
         if (s.indexOf("+") == -1) {
-            if (bookKeepDB.add(item, mEditRemark.getText().toString(), Float.valueOf(s), type)) {
+            if (bookKeepDB.add(item, mEditRemark.getText().toString(), Float.valueOf(s), type, time)) {
                 return true;
             } else {
                 return false;
@@ -310,7 +313,7 @@ public class ADDBKActivity extends AppCompatActivity implements View.OnClickList
             float a, b;
             a = Float.parseFloat(s.substring(0, s.indexOf("+")));
             b = Float.parseFloat(s.substring(s.indexOf("+")));
-            if (bookKeepDB.add(item, mEditRemark.getText().toString(), a + b, type)) {
+            if (bookKeepDB.add(item, mEditRemark.getText().toString(), a + b, type, time)) {
                 return true;
             } else {
                 return false;

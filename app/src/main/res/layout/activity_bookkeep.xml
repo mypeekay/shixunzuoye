@@ -9,8 +9,9 @@
     tools:context=".BookkeepActivity">
 
     <LinearLayout
+        android:id="@+id/line_skin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="220dp"
         android:background="@drawable/bookkeep"
         android:orientation="vertical"
         android:elevation="8dp"
@@ -22,6 +23,10 @@
             android:layout_marginTop="48dp"
             android:text="@string/all_money"
             android:textColor="#fff"
+            android:shadowColor="#000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="10"
             android:textSize="16dp" />
 
         <TextView
@@ -30,6 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textColor="#fff"
+            android:shadowColor="#000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="10"
             android:textSize="24dp"
             android:textStyle="bold" />
 
@@ -39,6 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:textColor="#fff"
+            android:shadowColor="#000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="10"
             android:textSize="16dp" />
 
         <TextView
@@ -48,6 +61,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:textColor="#fff"
+            android:shadowColor="#000"
+            android:shadowDx="1"
+            android:shadowDy="1"
+            android:shadowRadius="10"
             android:textSize="16dp" />
     </LinearLayout>
 

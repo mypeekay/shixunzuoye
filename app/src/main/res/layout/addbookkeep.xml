@@ -5,12 +5,17 @@
     android:background="#fff"
     android:orientation="vertical">
 
-    <GridView
-        android:id="@+id/gd_addkp"
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@null"
-        android:numColumns="5"
-        android:scrollbars="none"></GridView>
+        android:layout_height="match_parent">
+        <GridView
+            android:id="@+id/gd_addkp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:numColumns="5"
+            android:scrollbars="none"></GridView>
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
 
 </LinearLayout>

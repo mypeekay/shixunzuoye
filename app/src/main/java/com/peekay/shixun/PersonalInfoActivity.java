@@ -63,11 +63,12 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.tv_perinfo_sex:
                 final String[] sexs = new String[]{"男", "女"};
+                final String[] sexs1 = new String[]{"m", "f"};
                 dialog = new AlertDialog.Builder(this).
                         setSingleChoiceItems(sexs, 0, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                sex = sexs[i];
+                                sex = sexs1[i];
                                 postInfo();
                                 dialog.cancel();
                             }
@@ -118,7 +119,7 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
         OkHttpClient client=new OkHttpClient.Builder().build();
         Request request=new Request.Builder().url(APP.BASE_URI+"user/setUserinfo")
                 .addHeader("token", token)
-                .addHeader("token", token)
+                .addHeader("sex", sex)
                 .addHeader("birthday", birthday)
                 .addHeader("nickname", name).build();
         client.newCall(request).enqueue(new Callback() {
@@ -131,6 +132,11 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 try {
                     JSONObject jsonObject=new JSONObject(response.body().string());
+                    Log.d("sss123", "onResponse: "+jsonObject);
+                    Log.d("sss123", "onResponse: "+token);
+                    Log.d("sss123", "onResponse: "+sex);
+                    Log.d("sss123", "onResponse: "+name);
+                    Log.d("sss123", "onResponse: "+birthday);
                     if (jsonObject.optInt("code") == 200) {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("sex", sex);

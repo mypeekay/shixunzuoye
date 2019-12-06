@@ -5,6 +5,7 @@ public class BookKeepBean {
     String remark;
     Float money;
     int Type;
+    String time;
 
     public String getTitle() {
         return title;
@@ -12,6 +13,14 @@ public class BookKeepBean {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public Float getMoney() {
@@ -30,18 +39,19 @@ public class BookKeepBean {
         Type = type;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getTime() {
+        return time;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public BookKeepBean(String title, Float money, int type, String remark) {
+    public BookKeepBean(String title, String remark, Float money, int type, String time) {
         this.title = title;
+        this.remark = remark;
         this.money = money;
         Type = type;
-        this.remark = remark;
+        this.time = time;
     }
 }

@@ -52,18 +52,33 @@ public class BookKeepLVAdapter extends BaseAdapter {
             viewHolder.textView_title = view.findViewById(R.id.tv_title_bookkeep);
             viewHolder.textView_money = view.findViewById(R.id.tv_money_bookkeep);
             viewHolder.textView_remark = view.findViewById(R.id.tv_remark_bookkeep);
+            viewHolder.textView_time = view.findViewById(R.id.tv_bk_time);
             view.setTag(viewHolder);
         } else {
             view = convertView;
             viewHolder = (ViewHolder) view.getTag();
         }
         viewHolder.textView_title.setText(bookKeepBeans.get(position).getTitle());
+        //判断时间是否相同
+        viewHolder.textView_time.setText(bookKeepBeans.get(position).getTime());
+        if (position > 0) {
+            if (bookKeepBeans.get(position).getTime().equals(bookKeepBeans.get(position - 1).getTime())) {
+                viewHolder.textView_time.setVisibility(View.GONE);
+            } else {
+                viewHolder.textView_time.setVisibility(View.VISIBLE);
+            }
+        }else {
+            viewHolder.textView_time.setText(bookKeepBeans.get(position).getTime());
+            viewHolder.textView_time.setVisibility(View.VISIBLE);
+        }
+        //判断是否有备注
         if (!bookKeepBeans.get(position).getRemark().isEmpty()) {
             viewHolder.textView_remark.setText(bookKeepBeans.get(position).getRemark());
             viewHolder.textView_remark.setVisibility(View.VISIBLE);
         } else {
             viewHolder.textView_remark.setVisibility(View.GONE);
         }
+        //格式化金额并设置不同类型
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         if (bookKeepBeans.get(position).getType() == 0) {
             viewHolder.imageView_type.setImageResource(R.drawable.bookkeep_red);//支出
@@ -79,6 +94,6 @@ public class BookKeepLVAdapter extends BaseAdapter {
 
     class ViewHolder {
         ImageView imageView_type;
-        TextView textView_title, textView_money, textView_remark;
+        TextView textView_title, textView_money, textView_remark, textView_time;
     }
 }

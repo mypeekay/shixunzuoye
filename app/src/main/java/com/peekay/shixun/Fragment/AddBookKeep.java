@@ -60,11 +60,14 @@ public class AddBookKeep extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 item = addbks.get(i).getItem();
                 if (index == -1) {
+                    Log.d("sss123", "onItemClick: "+index);
                     View view1 = adapterView.getChildAt(i);
                     TextView textView = view1.findViewById(R.id.tv_addbk);
                     textView.setTextColor(Color.rgb(219, 68, 55));
                     index = i;
+                    Log.d("sss123", "onItemClick: "+index);
                 } else {
+                    Log.d("sss123", "onItemClick: "+index);
                     View view1 = adapterView.getChildAt(index);
                     TextView textView = view1.findViewById(R.id.tv_addbk);
                     textView.setTextColor(Color.rgb(0, 0, 0));
@@ -72,6 +75,7 @@ public class AddBookKeep extends Fragment {
                     textView = view1.findViewById(R.id.tv_addbk);
                     textView.setTextColor(Color.rgb(219, 68, 55));
                     index = i;
+                    Log.d("sss123", "onItemClick: "+index);
                 }
             }
         });

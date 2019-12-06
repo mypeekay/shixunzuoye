@@ -11,14 +11,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.peekay.shixun.adapter.BookKeepLVAdapter;
 import com.peekay.shixun.bean.BookKeepBean;
 import com.peekay.shixun.tools.BookKeepDB;
+import com.scwang.smartrefresh.header.BezierCircleHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.header.BezierRadarHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
@@ -35,9 +38,11 @@ public class BookkeepActivity extends AppCompatActivity {
     List<BookKeepBean> bookKeepBeans = new ArrayList<>();
     BookKeepLVAdapter bookKeepLVAdapter;
     private Button button_addbk;
+    private LinearLayout linearLayout_skin;
     BookKeepDB bookKeepDB;
     float zhichu = 0;
     float shouru = 0;
+    int skin = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,12 +71,13 @@ public class BookkeepActivity extends AppCompatActivity {
                 startActivity(new Intent(BookkeepActivity.this, ADDBKActivity.class));
             }
         });
+        smartRefreshLayout.setRefreshHeader(new BezierCircleHeader(this));
         smartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 load();
                 bookKeepLVAdapter.notifyDataSetChanged();
-                smartRefreshLayout.finishRefresh();
+                smartRefreshLayout.finishRefresh(2000);
             }
         });
         smartRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
@@ -79,7 +85,41 @@ public class BookkeepActivity extends AppCompatActivity {
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 load();
                 bookKeepLVAdapter.notifyDataSetChanged();
-                smartRefreshLayout.finishLoadMore();
+                smartRefreshLayout.finishLoadMore(2000);
+            }
+        });
+        linearLayout_skin = findViewById(R.id.line_skin);
+        linearLayout_skin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+        linearLayout_skin.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                switch (skin) {
+                    case 0:
+                        linearLayout_skin.setBackgroundResource(R.drawable.skin1);
+                        skin = 1;
+                        break;
+                    case 1:
+                        linearLayout_skin.setBackgroundResource(R.drawable.skin2);
+                        skin = 2;
+                        break;
+                    case 2:
+                        linearLayout_skin.setBackgroundResource(R.drawable.skin3);
+                        skin = 3;
+                        break;
+                    case 3:
+                        linearLayout_skin.setBackgroundResource(R.drawable.skin4);
+                        skin = 4;
+                        break;
+                    case 4:
+                        linearLayout_skin.setBackgroundResource(R.drawable.bookkeep);
+                        skin = 0;
+                        break;
+                }
+                return true;
             }
         });
     }
@@ -104,9 +144,10 @@ public class BookkeepActivity extends AppCompatActivity {
             }
             bookKeepBeans.add(new BookKeepBean(
                     cursor.getString(cursor.getColumnIndex("TITLE")),
+                    cursor.getString(cursor.getColumnIndex("REMARK")),
                     cursor.getFloat(cursor.getColumnIndex("MONEY")),
                     cursor.getInt(cursor.getColumnIndex("TYPE")),
-                    cursor.getString(cursor.getColumnIndex("REMARK"))
+                    cursor.getString(cursor.getColumnIndex("TIME"))
             ));
         }
         if (bookKeepBeans.isEmpty()) {

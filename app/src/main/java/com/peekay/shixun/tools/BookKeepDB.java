@@ -7,10 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class BookKeepDB extends SQLiteOpenHelper {
-    public static final String CREAT_TABLE = "CREATE TABLE JILU(ID INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,TITLE TEXT,REMARK TEXT,MONEY REAL)";
+    public static final String CREAT_TABLE = "CREATE TABLE JILU(ID INTEGER PRIMARY KEY AUTOINCREMENT,TYPE INTEGER,TITLE TEXT,REMARK TEXT,MONEY REAL,TIME TEXT)";
 
     public BookKeepDB(Context context) {
-        super(context, "BOOKKEEP.DB", null, 1);
+        super(context, "BOOKKEEP.DB", null, 2);
     }
 
     @Override
@@ -25,13 +25,14 @@ public class BookKeepDB extends SQLiteOpenHelper {
     }
 
     //添加记录
-    public Boolean add(String title, String remark, Float money, int type) {
+    public Boolean add(String title, String remark, Float money, int type,String time) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("TITLE", title);
         values.put("REMARK", remark);
         values.put("MONEY", money);
         values.put("TYPE", type);
+        values.put("TIME", time);
         long i = sqLiteDatabase.insert("JILU", null, values);
         if (i == -1) {
             return false;
