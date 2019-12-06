@@ -1,19 +1,24 @@
 package com.peekay.shixun;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.peekay.shixun.adapter.BookKeepLVAdapter;
 import com.peekay.shixun.bean.BookKeepBean;
@@ -40,9 +45,11 @@ public class BookkeepActivity extends AppCompatActivity {
     private Button button_addbk;
     private LinearLayout linearLayout_skin;
     BookKeepDB bookKeepDB;
+    AlertDialog dialog;
     float zhichu = 0;
     float shouru = 0;
     int skin = 0;
+    List<Integer> id = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,11 +96,6 @@ public class BookkeepActivity extends AppCompatActivity {
             }
         });
         linearLayout_skin = findViewById(R.id.line_skin);
-        linearLayout_skin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
         linearLayout_skin.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -122,6 +124,29 @@ public class BookkeepActivity extends AppCompatActivity {
                 return true;
             }
         });
+        listView_bookkeep.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, final int position, long l) {
+                dialog = new AlertDialog.Builder(BookkeepActivity.this).setMessage("删除本条数据？")
+                        .setPositiveButton("删除", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                SQLiteDatabase sqLiteDatabase = bookKeepDB.getWritableDatabase();
+                                if (sqLiteDatabase.delete("JILU", "ID = ?", new String[]{id.get(position) + ""}) == -1) {
+                                    Toast.makeText(getApplicationContext(), "删除失败！", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "删除成功！刷新数据即可！", Toast.LENGTH_LONG).show();
+                                    load();
+                                }
+                            }
+                        }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialog.dismiss();
+                            }
+                        }).show();
+            }
+        });
     }
 
     @Override
@@ -132,6 +157,7 @@ public class BookkeepActivity extends AppCompatActivity {
     }
 
     public void load() {
+        id.clear();
         bookKeepBeans.clear();
         shouru = 0;
         zhichu = 0;
@@ -149,6 +175,7 @@ public class BookkeepActivity extends AppCompatActivity {
                     cursor.getInt(cursor.getColumnIndex("TYPE")),
                     cursor.getString(cursor.getColumnIndex("TIME"))
             ));
+            id.add(cursor.getInt(cursor.getColumnIndex("ID")));
         }
         if (bookKeepBeans.isEmpty()) {
             textView_tips.setVisibility(View.VISIBLE);

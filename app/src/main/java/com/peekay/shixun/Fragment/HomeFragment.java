@@ -70,13 +70,13 @@ public class HomeFragment extends Fragment {
                     Log.d("sss123", "handleMessage: 刷新ok");
                     lvHomeAdapter.notifyDataSetChanged();
                     smartRefreshLayout.finishRefresh(1500);
-                    //TODO 执行刷新数据操作
+                    // 执行刷新数据操作
                     break;
                 case 2:
                     Log.d("sss123", "handleMessage: 加载更多ok");
                     lvHomeAdapter.notifyDataSetChanged();
                     smartRefreshLayout.finishLoadMore(1500);
-                    //TODO 执行加载更多操作
+                    // 执行加载更多操作
                     break;
                 case 3:
                     Log.d("sss123", "handleMessage: error");

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -43,6 +44,8 @@ public class SetPWDActivity extends AppCompatActivity implements View.OnClickLis
     private Button button_skip, button_setpwd;
     private ImageView imageView_show;
     LoadingDialog loadingDialog;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     int i = 0;
     Handler handler = new Handler() {
         @Override
@@ -65,6 +68,10 @@ public class SetPWDActivity extends AppCompatActivity implements View.OnClickLis
         token = getIntent().getStringExtra("token");
         loadingDialog = new LoadingDialog(this);
         initView();
+        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        if (getSharedPreferences("user", MODE_PRIVATE).getBoolean("ispwd", true)) {
+            finish();
+        }
     }
 
     private void initView() {
@@ -95,6 +102,9 @@ public class SetPWDActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             case R.id.btn_skip:
+                editor=sharedPreferences.edit();
+                editor.putBoolean("ispwd", true);
+                editor.commit();
                 finish();
                 break;
             case R.id.btn_setpwd:
@@ -111,12 +121,11 @@ public class SetPWDActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    //TODO 设置密码不行，可能是接口原因
     public void setPWD() {
         handler.sendEmptyMessage(1);
         OkHttpClient client = new OkHttpClient.Builder().build();
         Request request = new Request.Builder()
-                .url(APP.BASE_URI + "user/setpwd?token" + token + "&pwd=" + MD5Utils.getMD5(editText_pass.getText().toString()))
+                .url(APP.BASE_URI + "user/setpwd?token=" + token + "&pwd=" + MD5Utils.getMD5(editText_pass.getText().toString()))
                 .get().build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -133,6 +142,9 @@ public class SetPWDActivity extends AppCompatActivity implements View.OnClickLis
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                editor=sharedPreferences.edit();
+                                editor.putBoolean("ispwd", true);
+                                editor.commit();
                                 Toast.makeText(SetPWDActivity.this, "设置密码成功！", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
@@ -152,31 +164,5 @@ public class SetPWDActivity extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
-//        OkHttpUtils.get().url(APP.BASE_URI + "user/setpwd")
-//                .addParams("token", token).
-//                addParams("pwd", MD5Utils.getMD5(editText_pass.getText().toString())).build()
-//                .buildCall(new StringCallback() {
-//                    @Override
-//                    public void onError(Call call, Exception e, int id) {
-//                        Log.d("sss123", "onError: " + e.getMessage());
-//                    }
-//
-//                    @Override
-//                    public void onResponse(String response, int id) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            Log.d("sss123", "onResponse: "+jsonObject);
-//                            if (jsonObject.optInt("code") == 200) {
-//                                Toast.makeText(SetPWDActivity.this, "设置密码成功！", Toast.LENGTH_SHORT).show();
-//                                finish();
-//                            } else {
-//                                Toast.makeText(SetPWDActivity.this, "设置密码失败！", Toast.LENGTH_SHORT).show();
-//                            }
-//                            dialog.dismiss();
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                });
     }
 }
