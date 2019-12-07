@@ -136,7 +136,6 @@ public class BookkeepActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "删除失败！", Toast.LENGTH_LONG).show();
                                 } else {
                                     Toast.makeText(getApplicationContext(), "删除成功！刷新数据即可！", Toast.LENGTH_LONG).show();
-                                    load();
                                 }
                             }
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {

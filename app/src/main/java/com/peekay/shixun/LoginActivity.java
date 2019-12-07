@@ -146,20 +146,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         textView_forgetpass.setOnClickListener(this);
     }
 
+    //判断是否是手机号或邮箱格式
+    private Boolean isEorP(String s) {
+        String email="^\\w.+@\\w.+\\.\\w.+$";
+        String phone="^(13[0-9]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[13589])\\d{8}$";
+        if (s.matches(email)||s.matches(phone)){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     //判断是否可登录
     private void isLogin() {
         switch (textView_phonelogin.getVisibility()) {
             case View.VISIBLE:
-                if (editText_user.getText().length() >= 2 && editText_pass.getText().length() == 6) {
-                    button_login.setEnabled(true);
-                } else {
+                if (isEorP(editText_user.getText().toString())){
+                    if (editText_user.getText().length() >= 2 && editText_pass.getText().length() == 6) {
+                        button_login.setEnabled(true);
+                    } else {
+                        button_login.setEnabled(false);
+                    }
+                }else {
                     button_login.setEnabled(false);
                 }
                 break;
             case View.GONE:
-                if (editText_user.getText().length() >= 2 && editText_pass.getText().length() >= 6) {
-                    button_login.setEnabled(true);
-                } else {
+                if (isEorP(editText_user.getText().toString())){
+                    if (editText_user.getText().length() >= 2 && editText_pass.getText().length() >= 6) {
+                        button_login.setEnabled(true);
+                    } else {
+                        button_login.setEnabled(false);
+                    }
+                }else {
                     button_login.setEnabled(false);
                 }
                 break;
