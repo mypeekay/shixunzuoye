@@ -29,14 +29,14 @@ public class SettingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("email", "");
-                editor.putString("nickname", "");
-                editor.putString("avatar", "");
-                editor.putString("sex", "");
-                editor.putString("birthday", "");
-                editor.putString("phone", "");
-                editor.putString("token", "");
-                editor.putBoolean("ispwd", false);
+                editor.remove("email");
+                editor.remove("nickname");
+                editor.remove("avatar");
+                editor.remove("sex");
+                editor.remove("birthday");
+                editor.remove("phone");
+                editor.remove("token");
+                editor.remove("ispwd");
                 editor.commit();
                 finish();
                 Intent intent = new Intent(SettingActivity.this, LoginActivity.class);

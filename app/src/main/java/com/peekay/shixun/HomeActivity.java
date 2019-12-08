@@ -46,11 +46,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int permission = ActivityCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE");
         int permission1 = ActivityCompat.checkSelfPermission(this, "android.permission.CAMERA");
         //判断是否有读写权限
-        if (permission != PackageManager.PERMISSION_GRANTED||permission1 != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE","android.permission.CAMERA"}, 1);
+        if (permission != PackageManager.PERMISSION_GRANTED || permission1 != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{"android.permission.READ_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE", "android.permission.CAMERA"}, 1);
         }
         initView();
-        if (getSharedPreferences("user", MODE_PRIVATE).getBoolean("ispwd", true) == false) {
+        String s = String.valueOf(getSharedPreferences("user", MODE_PRIVATE).getBoolean("ispwd", true));
+        if (s.equals("false")) {
             Intent intent = new Intent(HomeActivity.this, SetPWDActivity.class);
             intent.putExtra("token", getSharedPreferences("user", MODE_PRIVATE).getString("token", ""));
             startActivity(intent);

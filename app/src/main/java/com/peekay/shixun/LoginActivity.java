@@ -340,8 +340,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             jsonObject = new JSONObject(s).getJSONObject("data");
             SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
-            String email = jsonObject.optString("email");
-            Log.d("sss123", "SaveInfo: " + email);
             editor.putString("email", jsonObject.optString("email"));
             editor.putString("nickname", jsonObject.optString("nickname"));
             editor.putString("avatar", jsonObject.optString("avatar"));
@@ -351,7 +349,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             editor.putString("token", jsonObject.optString("token"));
             editor.putBoolean("ispwd", jsonObject.optBoolean("ispwd"));
             editor.commit();
-            Log.d("sss123", "SaveInfo: " + jsonObject.optBoolean("ispwd"));
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         } catch (
