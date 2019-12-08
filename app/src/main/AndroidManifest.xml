@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".FindPWDActivity"></activity>
         <activity android:name=".PersonalInfoActivity" />
         <activity
             android:name=".AllPicActivity"
@@ -38,9 +39,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".HomeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ForgetPassActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".LoginActivity"

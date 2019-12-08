@@ -17,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.peekay.shixun.BookkeepActivity;
+import com.peekay.shixun.FindPWDActivity;
 import com.peekay.shixun.PersonalInfoActivity;
 import com.peekay.shixun.R;
 import com.peekay.shixun.SettingActivity;

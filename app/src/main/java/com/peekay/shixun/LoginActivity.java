@@ -41,6 +41,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.ScheduledExecutorService;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -148,11 +149,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //判断是否是手机号或邮箱格式
     private Boolean isEorP(String s) {
-        String email="^\\w.+@\\w.+\\.\\w.+$";
-        String phone="^(13[0-9]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[13589])\\d{8}$";
-        if (s.matches(email)||s.matches(phone)){
+        String email = "^\\w.+@\\w.+\\.\\w.+$";
+        String phone = "^(13[0-9]|15[0-3,5-9]|16[2567]|17[0-8]|18[0-9]|19[13589])\\d{8}$";
+        if (s.matches(email) || s.matches(phone)) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -161,24 +162,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void isLogin() {
         switch (textView_phonelogin.getVisibility()) {
             case View.VISIBLE:
-                if (isEorP(editText_user.getText().toString())){
+                if (isEorP(editText_user.getText().toString())) {
                     if (editText_user.getText().length() >= 2 && editText_pass.getText().length() == 6) {
                         button_login.setEnabled(true);
                     } else {
                         button_login.setEnabled(false);
                     }
-                }else {
+                } else {
                     button_login.setEnabled(false);
                 }
                 break;
             case View.GONE:
-                if (isEorP(editText_user.getText().toString())){
+                if (isEorP(editText_user.getText().toString())) {
                     if (editText_user.getText().length() >= 2 && editText_pass.getText().length() >= 6) {
                         button_login.setEnabled(true);
                     } else {
                         button_login.setEnabled(false);
                     }
-                }else {
+                } else {
                     button_login.setEnabled(false);
                 }
                 break;
@@ -215,7 +216,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 textView_phonelogin.setVisibility(View.VISIBLE);
                 break;
             case R.id.tv_forget_pass:
-                startActivity(new Intent(getApplicationContext(), ForgetPassActivity.class));
+                startActivity(new Intent(getApplicationContext(), FindPWDActivity.class));
                 break;
             case R.id.image_pass:
                 if (p == 0) {

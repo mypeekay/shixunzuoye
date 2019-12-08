@@ -54,4 +54,5 @@
     <string name="touxiang">头像</string>
     <string name="sex">性别</string>
     <string name="birthday">生日</string>
+    <string name="findpwd">找回密码</string>
 </resources>
