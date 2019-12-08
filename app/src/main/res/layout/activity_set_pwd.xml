@@ -9,17 +9,24 @@
     tools:context=".SetPWDActivity">
 
 
-        <TextView
-            android:id="@+id/tv_other_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:gravity="center_vertical"
-            android:text="@string/please_setpwd"
-            android:textColor="#000"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/tv_other_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="@string/please_setpwd"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/setpwd_tip" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -75,6 +82,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:background="#E9E9E9" />
+
     <Button
         android:id="@+id/btn_setpwd"
         android:layout_width="match_parent"
@@ -85,6 +93,7 @@
         android:backgroundTint="#DB4437"
         android:text="@string/button_set"
         android:textColor="#fff" />
+
     <Button
         android:id="@+id/btn_skip"
         android:layout_width="match_parent"

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
 import com.peekay.shixun.BookkeepActivity;
 import com.peekay.shixun.FindPWDActivity;
 import com.peekay.shixun.PersonalInfoActivity;
@@ -28,12 +30,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoFragment extends Fragment {
-    View view;
-    ListView listView;
+    private View view;
+    private ListView listView;
+    private ImageView imageView_touxiang;
     LvInfoAdapter lvInfoAdapter;
     private TextView textView_infoname;
     SharedPreferences sharedPreferences;
-    SharedPreferences.Editor editor;
     List<Lv_Info> infos = new ArrayList<>();
 
     @Nullable
@@ -48,8 +50,10 @@ public class InfoFragment extends Fragment {
 
     private void initView() {
         textView_infoname = view.findViewById(R.id.tv_info_name);
+        imageView_touxiang = view.findViewById(R.id.image_avat);
         sharedPreferences = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         textView_infoname.setText(sharedPreferences.getString("phone", "手机号"));
+        Glide.with(view).load(sharedPreferences.getString("avatar", "")).into(imageView_touxiang);
         listView = view.findViewById(R.id.lv_info);
         infos.add(new Lv_Info("个人信息"));
         infos.add(new Lv_Info("记账小助手"));

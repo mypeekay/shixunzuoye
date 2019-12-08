@@ -53,11 +53,6 @@
             android:layout_height="wrap_content"
             android:text="@string/login1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login2"
-            android:textColor="#DB4437" />
     </LinearLayout>
 
     <LinearLayout
@@ -74,8 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#fff"
-            android:inputType="text"
-            android:hint="@string/userhint" />
+            android:hint="@string/userhint"
+            android:inputType="text" />
 
         <TextView
             android:id="@+id/tv_getyzm"
