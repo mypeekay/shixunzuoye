@@ -113,7 +113,6 @@ public class PersonalInfoActivity extends AppCompatActivity implements View.OnCl
                         }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        dialog.dismiss();
                     }
                 }).show();
                 break;
